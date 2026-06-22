@@ -153,13 +153,13 @@ FieldLens-AI/
 Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/fieldlens-ai.git
+git clone https://github.com/sidhanth01/FieldLens-AI.git
 ```
 
 Go into the project directory
 
 ```bash
-cd fieldlens-ai
+cd FieldLens-AI
 ```
 
 Create a virtual environment
