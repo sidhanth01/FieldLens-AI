@@ -2,17 +2,17 @@
 
 > **AI-Powered Field Reporting Platform for NGOs**
 >
-> Built for **The Nudge Institute – AI Product Engineer Internship Assessment**
+> Built for **The Nudge Institute**
 
-FieldLens AI is an intelligent field reporting platform that helps NGO field officers capture observations, upload field evidence, and automatically generate structured AI-powered reports using **Google Gemini 2.5 Flash**.
+FieldLens AI is an intelligent field reporting platform that helps NGO field officers capture observations, upload field evidence, and automatically generate structured AI-powered reports.
 
 Instead of spending hours manually writing debriefs after every field visit, users can simply record their observations, attach photos or voice notes, and receive an organized report within seconds.
 
 ---
 
-# ✨ Features
+# Features
 
-## 📋 Field Visit Management
+## Field Visit Management
 
 - Record field visit details
 - Program information
@@ -23,7 +23,7 @@ Instead of spending hours manually writing debriefs after every field visit, use
 
 ---
 
-## 🤖 AI Report Generation
+## AI Report Generation
 
 Powered by **Google Gemini 2.5 Flash**
 
@@ -41,7 +41,7 @@ Every report follows a structured schema using **Pydantic**, ensuring consistent
 
 ---
 
-## 📸 Image Analysis
+## Image Analysis
 
 Upload field photos or capture images directly from your device.
 
@@ -56,7 +56,7 @@ These visual insights are incorporated into the final report.
 
 ---
 
-## 🎤 Voice Recording
+## Voice Recording
 
 Supports both:
 
@@ -67,7 +67,7 @@ Voice notes are stored alongside the visit for future reference.
 
 ---
 
-## 📷 Live Camera Capture
+## Live Camera Capture
 
 Capture photos directly inside the application using your device camera.
 
@@ -75,7 +75,7 @@ No need to leave the application to upload evidence.
 
 ---
 
-## 📊 Dashboard
+## Dashboard
 
 Real-time operational dashboard showing:
 
@@ -91,7 +91,7 @@ Also includes:
 
 ---
 
-## 📚 Visit History
+## Visit History
 
 Browse all historical visits.
 
@@ -106,7 +106,7 @@ Features include:
 
 ---
 
-# 🛠 Technology Stack
+# Technology Stack
 
 | Category | Technology |
 |----------|------------|
@@ -123,7 +123,7 @@ Features include:
 ```
 FieldLens-AI/
 │
-├── app.py
+├── About.py
 ├── config.py
 ├── requirements.txt
 │
@@ -148,7 +148,7 @@ FieldLens-AI/
 
 ---
 
-# 🚀 Installation
+# Installation
 
 Clone the repository
 
@@ -192,7 +192,7 @@ pip install -r requirements.txt
 
 ---
 
-# 🔑 Configure Gemini API
+# Configure Gemini API
 
 Create a `.env` file or configure a Streamlit secret.
 
@@ -214,10 +214,10 @@ GEMINI_API_KEY="YOUR_API_KEY"
 
 ---
 
-# ▶️ Run the Application
+# Run the Application
 
 ```bash
-streamlit run app.py
+streamlit run About.py
 ```
 
 The application will automatically
@@ -228,7 +228,7 @@ The application will automatically
 
 ---
 
-# 🗄 Database Design
+#  Database Design
 
 ## visits
 
@@ -257,7 +257,7 @@ Reports are linked to visits using a foreign key.
 
 ---
 
-# 🤖 AI Workflow
+# AI Workflow
 
 ```
 User Input
@@ -292,15 +292,15 @@ Dashboard Updates
 
 ---
 
-# 📱 Application Pages
+#  Application Pages
 
-## 🏠 Home
+## Home
 
 Overview of the platform, technology stack, workflow, and live metrics.
 
 ---
 
-## 📊 Dashboard
+## Dashboard
 
 Displays
 
@@ -312,7 +312,7 @@ Displays
 
 ---
 
-## 📝 New Field Visit
+## New Field Visit
 
 Allows users to
 
@@ -326,7 +326,7 @@ Allows users to
 
 ---
 
-## 📚 Visit History
+## Visit History
 
 Provides
 
@@ -338,7 +338,7 @@ Provides
 
 ---
 
-# 💡 Key Design Decisions
+# Key Design Decisions
 
 - Lightweight SQLite database
 - No ORM dependency
@@ -351,7 +351,7 @@ Provides
 
 ---
 
-# 🔒 AI Safety
+#  AI Safety
 
 The AI is instructed to
 
@@ -363,7 +363,7 @@ The AI is instructed to
 
 ---
 
-# 📸 Supported Media
+#  Supported Media
 
 Images
 
@@ -385,7 +385,7 @@ Supports
 
 ---
 
-# 📈 Future Improvements
+# Future Improvements
 
 Potential enhancements include:
 
@@ -402,7 +402,7 @@ Potential enhancements include:
 
 ---
 
-# 🎯 Assessment Highlights
+# Assessment Highlights
 
 This project demonstrates:
 
@@ -419,18 +419,12 @@ This project demonstrates:
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 **Sidhanth L**
 
 AI/ML Engineer
 
-Built as part of **The Nudge Institute AI Product Engineer Internship Assessment**.
-
 ---
-
-## ⭐ Thank You
-
-Thank you for reviewing **FieldLens AI**.
 
 This project showcases how Generative AI can significantly reduce manual reporting effort while helping NGO teams capture, organize, and analyze field intelligence in a structured and scalable manner.
