@@ -71,7 +71,7 @@ st.caption(
     "Capture field observations and generate an AI-powered debrief using Gemini."
 )
 st.info(
-    "📱 Mobile-first design • Photo uploads supported • AI-powered structured field reports"
+    "📱 Mobile-first design • Photo uploads & live recording supported • AI-powered structured field reports"
 )
 st.divider()
 
@@ -120,29 +120,52 @@ with st.form("field_visit_form", clear_on_submit=False):
     st.divider()
     st.markdown('<p class="custom-subheading">📎 Attachments (Optional)</p>', unsafe_allow_html=True)
 
-    # Image Upload / Selection
-    uploaded_image = st.file_uploader(
-        "Upload Field Photo",
-        type=["jpg", "jpeg", "png"],
-        help="Upload a site image for AI visual analysis."
-    )
-    if uploaded_image is not None:
-        st.image(uploaded_image, caption="Staged Field Photo Preview", use_container_width=True)
+    # Image Input Tabs (Upload vs. Camera)
+    st.write("### 📷 Field Photo Evidence")
+    image_tab1, image_tab2 = st.tabs(["📁 Upload File", "📸 Take Live Photo"])
+    
+    with image_tab1:
+        uploaded_image = st.file_uploader(
+            "Upload Field Photo",
+            type=["jpg", "jpeg", "png"],
+            help="Upload a site image for AI visual analysis.",
+            key="file_img"
+        )
+    with image_tab2:
+        live_image = st.camera_input("Snap a photo directly from the field", key="live_img")
+
+    # Consolidate dynamic image input sources
+    final_image_file = live_image if live_image else uploaded_image
+
+    if final_image_file is not None:
+        if not live_image:  # Only show manual preview container if it's an uploaded file
+            st.image(uploaded_image, caption="Staged Field Photo Preview", use_container_width=True)
     else:
-        st.caption("📷 No image uploaded.")
+        st.caption("📷 No image provided.")
 
     st.write("")
 
-    # Audio Upload / Selection
-    uploaded_audio = st.file_uploader(
-        "Upload Voice Note",
-        type=["mp3", "wav", "m4a"],
-        help="Optional voice recording from the field."
-    )
-    if uploaded_audio is not None:
-        st.audio(uploaded_audio)
+    # Audio Input Tabs (Upload vs. Live Recorder)
+    st.write("### 🎤 Voice Note Observations")
+    audio_tab1, audio_tab2 = st.tabs(["📁 Upload Audio File", "🎙️ Record Live Voice"])
+    
+    with audio_tab1:
+        uploaded_audio = st.file_uploader(
+            "Upload Voice Note",
+            type=["mp3", "wav", "m4a"],
+            help="Optional voice recording from the field.",
+            key="file_aud"
+        )
+    with audio_tab2:
+        live_audio = st.audio_input("Record a field update directly via microphone", key="live_aud")
+
+    # Consolidate dynamic audio input sources
+    final_audio_file = live_audio if live_audio else uploaded_audio
+
+    if final_audio_file is not None:
+        st.audio(final_audio_file)
     else:
-        st.caption("🎤 No voice note uploaded.")
+        st.caption("🎤 No voice note provided.")
 
     st.divider()
     generate_button = st.form_submit_button(
@@ -165,12 +188,19 @@ if generate_button:
         st.stop()
 
     pil_image = None
-    if uploaded_image is not None:
+    if final_image_file is not None:
         try:
-            pil_image = Image.open(uploaded_image).convert("RGB")
+            pil_image = Image.open(final_image_file).convert("RGB")
         except Exception:
-            st.error("Unable to read the uploaded image.")
+            st.error("Unable to read the selected image input.")
             st.stop()
+
+    # Capture extracted binary data payloads right now before submission completes
+    img_bytes = final_image_file.getvalue() if final_image_file else None
+    img_name = final_image_file.name if final_image_file else "visit.jpg"
+    
+    aud_bytes = final_audio_file.getvalue() if final_audio_file else None
+    aud_name = final_audio_file.name if final_audio_file else "visit.mp3"
 
     st.session_state.visit_data = {
         "program": program,
@@ -178,8 +208,10 @@ if generate_button:
         "date": str(visit_date),
         "stakeholders": stakeholders,
         "notes": notes,
-        "uploaded_image": uploaded_image,
-        "uploaded_audio": uploaded_audio,
+        "image_bytes": img_bytes,
+        "image_name": img_name,
+        "audio_bytes": aud_bytes,
+        "audio_name": aud_name,
         "image": pil_image,
     }
 
@@ -191,7 +223,7 @@ if generate_button:
                 stakeholders=st.session_state.visit_data["stakeholders"],
                 notes=st.session_state.visit_data["notes"],
                 image=st.session_state.visit_data["image"],
-                audio_bytes=uploaded_audio.getvalue() if uploaded_audio else None,
+                audio_bytes=st.session_state.visit_data["audio_bytes"],
             )
             st.session_state.generated_report = report
             st.success("✅ AI debrief generated successfully. Review it below before saving.")
@@ -260,11 +292,15 @@ if report:
         try:
             visit = st.session_state.visit_data
             
-            image_bytes = visit["uploaded_image"].getvalue() if visit["uploaded_image"] else None
-            image_extension = Path(visit["uploaded_image"].name).suffix if visit["uploaded_image"] else ".jpg"
+            image_bytes = visit["image_bytes"]
+            image_extension = Path(visit["image_name"]).suffix if visit["image_bytes"] else ".jpg"
 
-            audio_bytes = visit["uploaded_audio"].getvalue() if visit["uploaded_audio"] else None
-            audio_extension = Path(visit["uploaded_audio"].name).suffix if visit["uploaded_audio"] else ".mp3"
+            audio_bytes = visit["audio_bytes"]
+            audio_extension = Path(visit["audio_name"]).suffix if visit["audio_bytes"] else ".mp3"
+
+            # Adjust raw recording extension if default live buffer layout is captured
+            if audio_extension == ".wav" and audio_bytes:
+                audio_extension = ".mp3"
 
             visit_id = save_visit(
                 visit_data={
