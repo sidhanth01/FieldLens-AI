@@ -10,6 +10,21 @@ Instead of spending hours manually writing debriefs after every field visit, use
 
 ---
 
+## 🔗 Live Application Link
+
+💻 **🚀 Live Demo on Streamlit Cloud:** [(https://fieldlens-ai.streamlit.app/Dashboard)]  
+*(Note: Streamlit Community Cloud operates on an ephemeral filesystem. Local database metrics and uploads automatically reset when the container goes to sleep or code updates are pushed.)*
+
+### 🧪 Try It Yourself (Drought Assessment Test Case)
+Test the multimodal extraction layer by submitting a field log with a mix of media:
+1. Navigate to the **New Field Visit** tab.
+2. Enter `Drought Mitigation & Relief Assessment` as the **Program** and `Mandya District` as the **Location**.
+3. Copy/paste or say this into the **Field Notes/Audio**: *"Fields in Mandya are completely dry due to stopped canal water from the KRS reservoir. Standing sugarcane is dying. Farmers are anxious and need the pending subsidy immediately."*
+4. Upload a photo of dry, cracked ground or a parched farm field.
+5. Click **Generate AI Debrief** to see the system visually analyze the cracked soil texture from the image, log the speech bytes, flag the community sentiment as `Negative/Anxious`, and map the metrics into the dynamic dashboard.
+
+---
+
 # Features
 
 ## Field Visit Management
