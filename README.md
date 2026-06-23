@@ -12,10 +12,10 @@ Instead of spending hours manually writing debriefs after every field visit, use
 
 ## 🔗 Live Application Link
 
-💻 **🚀 Live Demo on Streamlit Cloud:** [(https://fieldlens-ai.streamlit.app/Dashboard)]  
+**Live Demo on Streamlit Cloud:** (https://fieldlens-ai.streamlit.app/Dashboard)
 *(Note: Streamlit Community Cloud operates on an ephemeral filesystem. Local database metrics and uploads automatically reset when the container goes to sleep or code updates are pushed.)*
 
-### 🧪 Try It Yourself (Drought Assessment Test Case)
+### Try It Yourself (Drought Assessment Test Case)
 Test the multimodal extraction layer by submitting a field log with a mix of media:
 1. Navigate to the **New Field Visit** tab.
 2. Enter `Drought Mitigation & Relief Assessment` as the **Program** and `Mandya District` as the **Location**.
