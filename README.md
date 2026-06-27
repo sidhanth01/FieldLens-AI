@@ -12,7 +12,9 @@ Instead of spending hours manually writing debriefs after every field visit, use
 
 ## 🔗 Live Application Link
 
-**Live Demo on Streamlit Cloud:** 👉 [Click here to test out the live app!](https://fieldlens-ai.streamlit.app/Dashboard)
+**Live on Streamlit Cloud:** 👉 [Click here to test out the live app!](https://fieldlens-ai.streamlit.app/Dashboard)
+
+**Demo Video:** [View Demo](https://drive.google.com/file/d/1hz6G3qkKw-L6niO2L2sQ6b-VVuMMtNJu/view?usp=drivesdk)
 
 *(Note: Streamlit Community Cloud operates on an ephemeral filesystem. Local database metrics and uploads automatically reset when the container goes to sleep or code updates are pushed.)*
 
